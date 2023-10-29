@@ -4,6 +4,7 @@ import "../globals.css";
 import TopBar from "@/components/shared/TopBar/TopBar";
 import LeftSidebar from "@/components/shared/LeftSidebar/LeftSidebar";
 import BottomBar from "@/components/shared/BottomBar/BottomBar";
+import RightSidebar from "@/components/shared/RightSidebar/RightSidebar";
 
 export const metadata = {
   title: "Threads",
@@ -18,11 +19,12 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <html lang="en">
         <body>
           <TopBar />
-          <main>
+          <main className="flex flex-row">
             <LeftSidebar />
             <section className="main-container">
               <div className="w-full max-w-4xl">{children}</div>
             </section>
+            <RightSidebar />
           </main>
           <BottomBar />
         </body>
