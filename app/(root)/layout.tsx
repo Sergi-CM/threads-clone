@@ -2,6 +2,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import TopBar from "@/components/shared/TopBar/TopBar";
+import LeftSidebar from "@/components/shared/LeftSidebar/LeftSidebar";
 
 export const metadata = {
   title: "Threads",
@@ -17,6 +18,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <body>
           <TopBar />
           <main>
+            <LeftSidebar />
             <section className="main-container">
               <div className="w-full max-w-4xl">{children}</div>
             </section>
