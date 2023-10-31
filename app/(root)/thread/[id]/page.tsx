@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs";
-import ThreadCard from "@/components/cards/ThreadCard/ThreadCard";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchThreadById } from "@/lib/actions/thread.actions";
+import ThreadCard from "@/components/cards/ThreadCard/ThreadCard";
+import Comment from "@/components/forms/Comment/Comment";
 
 export const revalidate = 0;
 
@@ -29,6 +30,14 @@ const ThreadDetailsPage = async ({ params }: { params: { id: string } }) => {
           community={thread.community}
           createdAt={thread.createdAt}
           comments={thread.children}
+        />
+      </div>
+
+      <div className="mt-7">
+        <Comment
+          threadId={params.id}
+          currentUserImg={user.imageUrl}
+          currentUserId={JSON.stringify(userInfo._id)}
         />
       </div>
     </section>
