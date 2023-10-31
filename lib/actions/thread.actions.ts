@@ -67,3 +67,40 @@ export const fetchThreads = async (pageNumber = 1, pageSize = 20) => {
 
   return { threads, isNext };
 };
+
+export const fetchThreadById = async (threadId: string) => {
+  connectToDatabase();
+
+  try {
+    const thread = await Thread.findById(threadId)
+      .populate({
+        path: "author",
+        model: User,
+        select: "_id id name image",
+      })
+      .populate({
+        path: "children",
+        populate: [
+          {
+            path: "author",
+            model: User,
+            select: "_id id name parentId image",
+          },
+          {
+            path: "children",
+            model: Thread,
+            populate: {
+              path: "author",
+              model: User,
+              select: "_id id name parentId image",
+            },
+          },
+        ],
+      })
+      .exec();
+
+    return thread;
+  } catch (error) {
+    throw new Error("Unable to fetch thread");
+  }
+};
